@@ -120,10 +120,10 @@ class ApiServerSpec extends WordSpec with Matchers with BeforeAndAfterAll {
     for {
       transactor <- Database.transactor(config.database)
       _ <- Database.initialize(transactor)
-      repository = new JobRepository(transactor)
       server <- BlazeBuilder[IO]
         .bindHttp(config.server.port, config.server.host)
-        .mountService(new JobService(repository).service, "/").start
+        .mountService(new JobService(new JobRepository(transactor)).service, "/")
+        .start
     } yield server
   }
 }
