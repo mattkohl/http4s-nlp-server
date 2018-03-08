@@ -1,6 +1,4 @@
 import cats.effect.IO
-import config.Config
-import db.Database
 import io.circe.Json
 import io.circe.literal._
 import org.http4s.circe._
@@ -10,8 +8,10 @@ import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpec}
 import io.circe.optics.JsonPath._
 import org.http4s.server.{Server => Http4sServer}
 import org.http4s.server.blaze.BlazeBuilder
-import repository.JobRepository
-import service.JobService
+import com.mattkohl.nlp.config.Config
+import com.mattkohl.nlp.db.Database
+import com.mattkohl.nlp.repository.JobRepository
+import com.mattkohl.nlp.service.JobService
 
 class ApiServerSpec extends WordSpec with Matchers with BeforeAndAfterAll {
   private lazy val client = Http1Client[IO]().unsafeRunSync()

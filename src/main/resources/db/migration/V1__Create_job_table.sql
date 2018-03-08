@@ -1,0 +1,4 @@
+CREATE TABLE job (
+  id SERIAL PRIMARY KEY,
+  text TEXT
+);

@@ -1,7 +1,7 @@
 package com.mattkohl.nlp.db
 
 import cats.effect.IO
-import config.DatabaseConfig
+import com.mattkohl.nlp.config.DatabaseConfig
 import doobie.hikari.HikariTransactor
 import org.flywaydb.core.Flyway
 
