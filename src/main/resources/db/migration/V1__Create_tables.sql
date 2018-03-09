@@ -7,7 +7,7 @@ CREATE TABLE `tokens` (
   `job_id` SERIAL NOT NULL,
   `position` INT NOT NULL,
   `token` VARCHAR(50) NOT NULL,
-  `partOfSpeech` VARCHAR(10) NOT NULL,
+  `part_of_speech` VARCHAR(10) NOT NULL,
   CONSTRAINT `fk_tokens_job`
   FOREIGN KEY (`job_id`)
   REFERENCES `jobs` (`id`)

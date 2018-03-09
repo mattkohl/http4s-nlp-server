@@ -17,7 +17,11 @@ class JobRepository(transactor: Transactor[IO]) {
   }
 
   def getJob(id: Long): IO[Either[JobNotFoundError.type, Job]] = {
-    sql"SELECT j.id, j.text FROM jobs AS j WHERE j.id = $id"
+    sql"""
+         |SELECT j.id, j.text
+         |FROM jobs AS j
+         |WHERE j.id = $id
+         |"""
       .query[Job]
       .option
       .transact(transactor)
@@ -34,6 +38,16 @@ class JobRepository(transactor: Transactor[IO]) {
       .transact(transactor)
       .map { id =>
         job.copy(id = Some(id))
+      }
+  }
+
+  def createToken(token: Token, job: Job): IO[Token] = {
+    sql"INSERT INTO tokens (token, part_of_speech, job_id) VALUES (${token.token}, ${token.partOfSpeech}, ${job.id})"
+      .update
+      .withUniqueGeneratedKeys[Long]("id")
+      .transact(transactor)
+      .map { id =>
+        token.copy(id = Some(id))
       }
   }
 
