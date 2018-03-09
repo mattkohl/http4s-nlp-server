@@ -15,6 +15,8 @@ package object model {
 
   case class Job(id: Option[Long], text: String)
 
+  case class Token(id: Option[Long], position: Int, token: String, partOfSpeech: String)
+
   case object JobNotFoundError
 
 }
